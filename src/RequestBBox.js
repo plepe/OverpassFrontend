@@ -53,10 +53,12 @@ class RequestBBox extends Request {
         this.lokiQuery = { $and: [ this.lokiQuery, filterLokiQuery ] }
       }
 
-      this.lokiQuery.minlat = { $lte: this.bounds.maxlat }
-      this.lokiQuery.minlon = { $lte: this.bounds.maxlon }
-      this.lokiQuery.maxlat = { $gte: this.bounds.minlat }
-      this.lokiQuery.maxlon = { $gte: this.bounds.minlon }
+      if (this.bounds) {
+        this.lokiQuery.minlat = { $lte: this.bounds.maxlat }
+        this.lokiQuery.minlon = { $lte: this.bounds.maxlon }
+        this.lokiQuery.maxlat = { $gte: this.bounds.minlat }
+        this.lokiQuery.maxlon = { $gte: this.bounds.minlon }
+      }
     }
 
     this.loadFinish = false

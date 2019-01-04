@@ -474,7 +474,9 @@ class OverpassFrontend {
    * @return {RequestBBox}
    */
   BBoxQuery (query, bounds, options, featureCallback, finalCallback) {
-    bounds = new BoundingBox(bounds)
+    if (bounds) {
+      bounds = new BoundingBox(bounds)
+    }
 
     var request = new RequestBBox(this, {
       query: query,
